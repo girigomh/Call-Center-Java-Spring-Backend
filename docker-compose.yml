@@ -1,0 +1,40 @@
+version: "3.6"
+services:
+
+  ########### Api Gateway Service
+  api-gateway-service:
+    container_name: api_gateway_service
+    image: api_gateway_server
+    build:
+      dockerfile: Dockerfile
+      context: ./api-gateway
+    restart: on-failure
+    ports:
+      - "8000:8000"
+
+  ########### Auth Service
+  auth-service:
+    container_name: auth_service
+    image: auth_server
+    build:
+      dockerfile: Dockerfile
+      context: ./auth-service
+    restart: on-failure
+    ports:
+      - "8001:8001"
+
+  ########### Core Service
+  core-service:
+    container_name: core_service
+    image: core_service_module
+    build:
+      dockerfile: Dockerfile
+      context: ./core-service
+    restart: on-failure
+    ports:
+      - "8002:8002"
+
+networks:
+  default:
+    name: comcom-network
+    external: true

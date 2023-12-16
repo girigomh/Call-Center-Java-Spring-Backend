@@ -1,0 +1,124 @@
+package org.comcom.model;
+
+import lombok.*;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+
+@Entity
+@Table(name = "users")
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Users implements Serializable {
+
+    private static final Long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_gen")
+    @SequenceGenerator(name="user_gen", sequenceName = "user_gen_sequence", initialValue = 1, allocationSize = 1)
+    private Long id;
+
+    @Column(name = "firstName")
+    private String firstName;
+
+    @Column(name = "lastName")
+    private String lastName;
+
+    @Column(name = "email", unique = true)
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "login_attempts")
+    private Integer loginAttempts;
+
+    @Column(name = "gender")
+    private Gender gender;
+
+    @Column(name = "dob")
+    private LocalDate dob;
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "phone", unique = true)
+    private Integer phone;
+
+    @Column(name = "profile_photo")
+    private String profilePhoto;
+
+    @Column(name = "title_photo")
+    private String titlePhoto;
+
+    @Column(name = "online_status")
+    private OnlineStatus status;
+
+    @Column(name = "video_call_url")
+    private String videoCallUrl;
+
+    @Column(name = "verified")
+    private Boolean verified = false;     // Email Verified == Account Verified
+
+    @Column(name = "verification_code")
+    private Integer verificationCode;    // Verification Code
+
+    @Column(name = "sms_verified")
+    private Boolean smsVerified;        // SMS Verified == Double Account Verified
+
+    @Column(name = "sms_verification_code")
+    private Integer smsVerificationCode;    // Verification Code for SMS
+
+    @Column(name = "last_login")
+    private LocalDate lastLogin;
+//============= Address Info =================
+
+
+    @Column(name = "house_no")
+    private String houseNo;
+
+    @Column(name = "street")
+    private String street;
+
+    @Column(name = "location")
+    private String location;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "state")
+    private String state;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "zip")
+    private String zip;
+
+    //========= For Audit ===============
+
+    @Column(name = "created_on")
+    private LocalDateTime createdOn;
+
+    @Column(name = "update_on")
+    private LocalDateTime updatedOn;
+
+    //=========== Foreign Keys ================
+
+    @JoinColumn(name = "profile", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Role profile;
+
+
+    @JoinColumn(name = "company", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Company company;
+
+
+}

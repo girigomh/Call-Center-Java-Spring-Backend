@@ -1,0 +1,25 @@
+#Spring Configuration
+spring:
+  #Database ConfigLaas
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  datasource:
+    username: admin
+    password: password
+    url: jdbc:mysql://91.151.16.36:3306/comcom_database?allowPublicKeyRetrieval=true&useSSL=False
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#Security Config
+config:
+  jwt:
+    issuer: app.comcom.at
+    audience: comcom.at
+    signatureKey: $2y$10$IEUC164/5TqfJFkfY2YS.u881.OBilVuZmcIf04Y7R9Z
+
+password-reset:
+  expiration-time-in-hours: 48

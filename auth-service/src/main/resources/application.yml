@@ -1,0 +1,23 @@
+server:
+  port: 8001
+  servlet:
+    context-path: /api
+
+spring:
+  profiles:
+    active: '@activeProfile@'
+  application:
+    name: AUTH-SERVICE
+  mail:
+    host: mail.comcom.at
+    port: 587
+    username: comcom
+    password: root
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+
