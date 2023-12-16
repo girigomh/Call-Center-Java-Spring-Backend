@@ -1,0 +1,10 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /comcom
+
+spring:
+  profiles:
+    active: '@activeProfile@'
+  application:
+    name: API-GATEWAY
